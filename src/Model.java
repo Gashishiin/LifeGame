@@ -41,6 +41,21 @@ class Model {
 
     }
 
+    int countNeghbour(int x, int y){
+        int count = 0;
+        for (int i = x-1; i <= x+1; i++) {
+            for (int j = y-1; j <=y+1 ; j++) {
+                if ( (i!=x || j!=y) && i >= 0 && i < WIDTH && j >= 0 && j < HEIGHT)
+                {
+                    if (field[j][i]) count++;
+                }
+
+            }
+        }
+        return count;
+    }
+
+
 
 
 

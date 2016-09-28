@@ -13,7 +13,7 @@ class View extends JFrame{
             public void run() {
                 setTitle("Field");
                 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                grid = new GridLayout(20,20,1,1);
+                grid = new GridLayout(20,20,0,0);
                 setLayout(grid);
                 setPreferredSize(new Dimension(200,200));
                 setVisible(true);
@@ -34,6 +34,7 @@ class View extends JFrame{
                     x = i / Model.WIDTH;
                     y = i % Model.HEIGHT;
                     if (model.getField()[y][x]) buttons.get(i).setBackground(Color.black);
+                    buttons.get(i).setText(model.countNeghbour(x,y)+"");
                 }
             }
         });
@@ -50,7 +51,7 @@ class View extends JFrame{
                         JButton b = new JButton();
                         buttons.add(b);
                         add(b);
-                        b.setBackground(Color.GRAY);
+                        b.setBackground(Color.WHITE);
                     }
                 }
                 refresh();
