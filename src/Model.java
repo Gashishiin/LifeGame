@@ -1,29 +1,23 @@
 import java.io.*;
 
-/**
- * Created by gashi_000 on 27.09.2016.
- */
-public class Model {
-    private final static int width = 20;
-    private final static int height = 20;
+class Model {
+    final static int WIDTH = 20;
+    final static int HEIGHT = 20;
 
-    public static int getWidth() {
-        return width;
+
+    static int getHeight() {
+        return HEIGHT;
     }
 
-    public static int getHeight() {
-        return height;
-    }
+    private File level = new File("src"+File.separator + "initField1");
 
-    private File level = new File("src\\initField1");
-
-    public char[][] getField() {
+    boolean[][] getField() {
         return field;
     }
 
-    char[][] field = new char[width][height];
+    private boolean[][] field = new boolean[WIDTH][HEIGHT];
 
-    public void init() {
+    void init() {
         try (BufferedReader reader = new BufferedReader(new FileReader(level))) {
             String line;
             char[] lineOfChar;
@@ -31,16 +25,22 @@ public class Model {
             while ((line = reader.readLine()) != null) {
                 lineOfChar = line.toCharArray();
                 for (int i = 0; i < lineOfChar.length; i++) {
-                    field[i][lineNum] = lineOfChar[i];
+                    if (lineOfChar[i]=='x') field[i][lineNum] = true;
+                    else field[i][lineNum] = false;
+
                 }
                 lineNum++;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void doStep() {
+
+
+    }
+
 
 
 
