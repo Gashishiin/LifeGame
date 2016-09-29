@@ -1,7 +1,7 @@
 import java.io.*;
 
 class Model {
-    final static int WIDTH = 20;
+    final static int WIDTH = 30;
     final static int HEIGHT = 20;
     boolean isStopped = false;
 
@@ -41,15 +41,20 @@ class Model {
 
 
         boolean[][] newField = new boolean[WIDTH][HEIGHT];
-        for (int i = 0; i < field[0].length; i++) {
-            for (int j = 0; j < field.length; j++) {
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[0].length; j++) {
 
                 int neighbourNum = countNeghbour(field,i, j);
-                if (field[i][j] && (neighbourNum > 3 || neighbourNum < 2)) {
-                    newField[i][j] = false;
-                } else if (!field[i][j] && neighbourNum == 3) {
-                    newField[i][j] = true;
+                if (field[i][j]){
+                    if (neighbourNum > 3 || neighbourNum < 2) newField[i][j]=false;
+                    else newField[i][j]=true;
                 }
+                else {
+                    if (neighbourNum == 3) newField[i][j]=true;
+                    else newField[i][j]=false;
+                }
+
+
             }
         }
         field = newField;

@@ -1,4 +1,3 @@
-
 public class Controller implements Runnable{
     private Model model = new Model();
     private View view = new View();
@@ -9,7 +8,7 @@ public class Controller implements Runnable{
                     model.doStep();
                     view.refresh();
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
