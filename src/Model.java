@@ -1,13 +1,10 @@
 import java.io.*;
 
 class Model {
-    final static int WIDTH = 30;
-    final static int HEIGHT = 20;
+    final static int WIDTH = 20;
+    final static int HEIGHT = 15;
     boolean isStopped = false;
 
-    static int getHeight() {
-        return HEIGHT;
-    }
 
     private File level = new File("src" + File.separator + "initField1");
 
@@ -25,10 +22,8 @@ class Model {
             int lineNum = 0;
             while ((line = reader.readLine()) != null) {
                 lineOfChar = line.toCharArray();
-                for (int i = 0; i < lineOfChar.length; i++) {
-                    if (lineOfChar[i] == 'x') field[i][lineNum] = true;
-                    else field[i][lineNum] = false;
-
+                for (int charPosInLine = 0; charPosInLine < lineOfChar.length; charPosInLine++) {
+                    field[charPosInLine][lineNum] = (lineOfChar[charPosInLine]== 'x');
                 }
                 lineNum++;
             }
@@ -41,17 +36,17 @@ class Model {
 
 
         boolean[][] newField = new boolean[WIDTH][HEIGHT];
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field[0].length; j++) {
+        for (int row = 0; row < field[0].length; row++) {
+            for (int column = 0; column < field.length; column++) {
 
-                int neighbourNum = countNeghbour(field,i, j);
-                if (field[i][j]){
-                    if (neighbourNum > 3 || neighbourNum < 2) newField[i][j]=false;
-                    else newField[i][j]=true;
+                int neighbourNum = countNeghbour(field,column, row);
+                if (field[column][row]){
+                    if (neighbourNum > 3 || neighbourNum < 2) newField[column][row]=false;
+                    else newField[column][row]=true;
                 }
                 else {
-                    if (neighbourNum == 3) newField[i][j]=true;
-                    else newField[i][j]=false;
+                    if (neighbourNum == 3) newField[column][row]=true;
+                    else newField[column][row]=false;
                 }
 
 
@@ -60,12 +55,12 @@ class Model {
         field = newField;
     }
 
-    int countNeghbour(boolean[][] fieldOld,int x, int y) {
+    int countNeghbour(boolean[][] fieldOld,int currentColumn, int currentRow) {
         int count = 0;
-        for (int i = x - 1; i <= x + 1; i++) {
-            for (int j = y - 1; j <= y + 1; j++) {
-                if ((i != x || j != y) && i >= 0 && i < WIDTH && j >= 0 && j < HEIGHT) {
-                    if (fieldOld[i][j]) count++;
+        for (int row = currentRow - 1; row <= currentRow + 1; row++) {
+            for (int column = currentColumn - 1; column <= currentColumn + 1; column++) {
+                if ((row != currentRow || column != currentColumn) && row >= 0 && row < HEIGHT && column >= 0 && column < WIDTH) {
+                    if (fieldOld[column][row]) count++;
                 }
 
             }

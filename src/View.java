@@ -26,11 +26,11 @@ class View extends JFrame {
     }
 
      void refresh() {
-        int x, y;
+        int row, column;
         for (int i = 0; i < buttons.size(); i++) {
-            x = i / Model.WIDTH;
-            y = i % Model.HEIGHT;
-            if (model.getField()[x][y]) {
+            row = i / Model.WIDTH;
+            column = i % Model.WIDTH;
+            if (model.getField()[column][row]) {
                 buttons.get(i).setBackground(Color.black);
             }
             else {
@@ -41,20 +41,18 @@ class View extends JFrame {
     }
 
     void init() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                model.init();
-                for (int i = 0; i < model.getField().length; i++) {
-                    for (int j = 0; j < model.getField()[0].length; j++) {
-                        JButton b = new JButton();
-                        buttons.add(b);
-                        add(b);
-                    }
+        SwingUtilities.invokeLater(() -> {
+            model.init();
+            for (int row = 0; row < model.getField()[0].length; row++) {
+                for (int column = 0; column < model.getField().length; column++) {
+                    JButton b = new JButton();
+                    buttons.add(b);
+                    add(b);
                 }
-                refresh();
-
             }
+
+            refresh();
+
         });
     }
 
